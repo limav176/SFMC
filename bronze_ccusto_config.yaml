@@ -1,0 +1,15 @@
+name: "bronze_ccusto"
+type: "custom"
+ingestion_columns: true
+execution_columns: true
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/CCUSTO/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/ccusto/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "ccusto_sfi"
+    mode: "overwrite"
+    partition_by: ["execution_year", "execution_month", "execution_day"]

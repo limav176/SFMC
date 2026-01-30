@@ -1,0 +1,6 @@
+# sufixo da dag encontrada no Airlflow
+dag_name: bronze_optout
+# nome do arquivo final no ftp da salesforce (* or ! wildcard)
+sftp_file: "DV_OPTOUT.csv"
+#  path até os arquivos
+sftp_path: "/Export/"

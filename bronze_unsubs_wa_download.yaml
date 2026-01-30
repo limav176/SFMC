@@ -1,0 +1,6 @@
+# sufixo da dag encontrada no Airlflow
+dag_name: bronze_unsubs_wa
+# nome do arquivo final no ftp da salesforce (* or ! wildcard)
+sftp_file: "DV_UNSUBSWA.csv"
+#  path até os arquivos
+sftp_path: "/Export/"

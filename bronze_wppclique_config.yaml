@@ -1,0 +1,15 @@
+name: "bronze_wppclique"
+type: "custom"
+ingestion_columns: true
+execution_columns: true
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/WPPCLIQUE/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/wppclique/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "wppclique_sfi"
+    mode: "append"
+    partition_by: ["execution_year", "execution_month", "execution_day"]

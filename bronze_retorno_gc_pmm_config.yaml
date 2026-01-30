@@ -1,0 +1,15 @@
+name: "bronze_retorno_gc_pmm"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/RETORNOGC/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/crm_bronze/retornogc/"
+    type: "table"
+    database: "crm_bronze"
+    table_name: "retorno_gc_pmm_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "overwrite"

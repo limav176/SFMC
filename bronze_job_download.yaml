@@ -1,0 +1,6 @@
+# sufixo da dag encontrada no Airlflow
+dag_name: bronze_job
+# nome do arquivo final no ftp da salesforce (* or ! wildcard)
+sftp_file: "DV_JOB.csv"
+#  path até os arquivos
+sftp_path: "/Export/"

@@ -1,0 +1,17 @@
+name: "bronze_optout"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_optout.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/OPTOUT/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/optout/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "optout_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "overwrite"
+

@@ -1,0 +1,6 @@
+# sufixo da dag encontrada no Airlflow
+dag_name: ccusto
+# nome do arquivo final no ftp da salesforce (* or ! wildcard)
+sftp_file: "DV_CCUSTO.csv"
+#  path até os arquivos
+sftp_path: "/Export/"

@@ -1,0 +1,16 @@
+name: "bronze_tag_push"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_tag_push.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/TAG/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/tag/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "tag_push_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "append"

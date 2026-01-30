@@ -1,0 +1,22 @@
+name: "bronze_job"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_job.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/JOB/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/job/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "job_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "append"
+transformations:
+- {schedtime: {type: "to_timestamp", mask: "y-M-d h:m:s"}}
+- {pickuptime: {type: "to_timestamp", mask: "y-M-d h:m:s"}}
+- {deliveredtime: {type: "to_timestamp", mask: "y-M-d h:m:s"}}
+- {originalschedtime: {type: "to_timestamp", mask: "y-M-d h:m:s"}}
+- {createddate: {type: "to_timestamp", mask: "y-M-d h:m:s"}}

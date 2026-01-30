@@ -1,0 +1,15 @@
+name: "bronze_sms_held"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/UNDELIVERABLE/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/sms_held/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "sms_held_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "append"

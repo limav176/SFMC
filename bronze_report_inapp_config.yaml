@@ -1,0 +1,16 @@
+name: "bronze_report_inapp"
+type: "custom"
+ingestion_columns: true
+execution_columns: true
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/UPDATEINAPP/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/report_inapp/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "report_inapp_sfi"
+    mode: "append"
+    partition_by: ["execution_year", "execution_month", "execution_day"]
+

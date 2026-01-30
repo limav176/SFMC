@@ -1,0 +1,18 @@
+name: "bronze_journey"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_journey.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/JOURNEY/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/journey/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "journey_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "overwrite"
+transformations:
+- {lastpublisheddate: {type: "to_timestamp", mask: "M/d/y h:m:s a"}}

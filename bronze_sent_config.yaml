@@ -1,0 +1,17 @@
+name: "bronze_sent"
+type: "custom"
+ingestion_columns: true
+execution_columns: true
+custom_class: "bronze_sent.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/SENT/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: ","
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/sent_trk/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "sent_sfi"
+    mode: "append"
+    partition_by: ["execution_year", "execution_month", "execution_day"]
+drop_columns: ["account_id", "customer_key", "customobjectkey"]

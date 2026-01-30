@@ -1,0 +1,16 @@
+name: "bronze_metadados_sfi"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_metadados_sfi.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/SFI_METADATA/*/*.csv"
+    type: "csv"
+    sep: ","
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/metadata_sfi/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "metadados_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "overwrite"

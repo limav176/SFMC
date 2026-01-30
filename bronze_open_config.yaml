@@ -1,0 +1,16 @@
+name: "bronze_open"
+type: "custom"
+execution_columns: true
+ingestion_columns: true
+custom_class: "bronze_open.py"
+from:
+    path: "s3://data-raw-zone-will-{env}/salesforce/OPEN/{day}-{month}-{year}/*.csv"
+    type: "csv"
+    sep: "|"
+to:
+    path: "s3://data-bronze-zone-will-prod/comunicacoes_bronze/open/"
+    type: "table"
+    database: "comunicacoes_bronze"
+    table_name: "open_sfi"
+    partition_by: ['execution_year','execution_month','execution_day']
+    mode: "append"
